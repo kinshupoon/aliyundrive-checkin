@@ -1,7 +1,7 @@
 name: aliyundrive-checkin
 on:
   schedule:
-  - cron: 38 18 * * *
+  - cron: 55 18 * * *
   workflow_dispatch:
 jobs:
   build:
