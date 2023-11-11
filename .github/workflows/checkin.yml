@@ -21,4 +21,10 @@ jobs:
           WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
           BARK_DEVICEKEY: ${{ secrets.BARK_DEVICEKEY }}
           FEISHU_DEVICEKEY: ${{ secrets.FEISHU_DEVICEKEY }}
+      - name: Run enshan
+        run: |
+          python3 ./enshan.py
+        env:
+          ENSHANCK: ${{ secrets.ENSHANCK }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
       - uses: gautamkrishnar/keepalive-workflow@master
