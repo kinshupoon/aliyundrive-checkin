@@ -15,7 +15,7 @@ jobs:
         run: |
           python3 ./main.py --token_string "${{ secrets.TOKEN }}"
         env:
-          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          #PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
           SERVERCHAN_SENDKEY: ${{ secrets.SCKEY }}
           WECOM_TOKENS: ${{ secrets.WECOM_TOKENS }}
           WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
