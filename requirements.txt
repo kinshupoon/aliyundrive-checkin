@@ -1,2 +1,4 @@
 requests
 tenacity
+beautifulsoup4
+bs4
