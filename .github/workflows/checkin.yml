@@ -11,28 +11,29 @@ jobs:
       - name: Install requirements
         run: |
           pip3 install -r ./requirements.txt
-      - name: Run checkin
-        run: |
-          time=$(($RANDOM%300));echo $time
-          sleep $time
-          python3 ./main.py --token_string "${{ secrets.TOKEN }}"
-        env:
-          #PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
-          SERVERCHAN_SENDKEY: ${{ secrets.SCKEY }}
-          WECOM_TOKENS: ${{ secrets.WECOM_TOKENS }}
-          WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
-          BARK_DEVICEKEY: ${{ secrets.BARK_DEVICEKEY }}
-          FEISHU_DEVICEKEY: ${{ secrets.FEISHU_DEVICEKEY }}
+    #   - name: Run checkin
+    #     run: |
+    #       time=$(($RANDOM%300));echo $time
+    #       sleep $time
+    #       python3 ./main.py --token_string "${{ secrets.TOKEN }}"
+    #     env:
+    #       #PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+    #       SERVERCHAN_SENDKEY: ${{ secrets.SCKEY }}
+    #       WECOM_TOKENS: ${{ secrets.WECOM_TOKENS }}
+    #       WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
+    #       BARK_DEVICEKEY: ${{ secrets.BARK_DEVICEKEY }}
+    #       FEISHU_DEVICEKEY: ${{ secrets.FEISHU_DEVICEKEY }}
           
-      - name: Run enshan
-        run: |
-          python3 ./enshan.py
-        env:
-          ENSHANCK: ${{ secrets.ENSHANCK }}
-          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+    #   - name: Run enshan
+    #     run: |
+    #       python3 ./enshan.py
+    #     env:
+    #       ENSHANCK: ${{ secrets.ENSHANCK }}
+    #       PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
           
       - name: CN IP4
         run: |
+          rm 国内城市IP.csv ip_ranges.csv cidr_ip.csv
           python3 ./ip4.py
           git config --local user.email "${{ secrets.EMAIL }}"
           git config --local user.name "${{ github.actor }}"
