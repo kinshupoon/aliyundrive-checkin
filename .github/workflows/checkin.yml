@@ -33,7 +33,7 @@ jobs:
           
       - name: CN IP4
         run: |
-          rm 国内城市IP.csv ip_ranges.csv cidr_ip.csv
+          git rm 国内城市IP.csv ip_ranges.csv cidr_ip.csv
           python3 ./ip4.py
           git config --local user.email "${{ secrets.EMAIL }}"
           git config --local user.name "${{ github.actor }}"
