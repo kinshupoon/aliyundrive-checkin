@@ -37,6 +37,7 @@ jobs:
           git config --local user.email "${{ secrets.EMAIL }}"
           git config --local user.name "${{ github.actor }}"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          cat 国内城市IP.csv
           git add "国内城市IP.csv"
           git commit -m "Update 国内城市IP.csv"
           git add "ip_ranges.csv"
