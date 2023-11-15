@@ -72,6 +72,12 @@ total_quantities = {}  # 创建一个字典，用于存储每个网址的IP数�
 for url in urls:
   data = process_url(url)
   all_data.extend(data)  # 将每个URL的数据合并到all_data列表中
+  total_quantity = sum([entry[2] for entry in data])  # 求和每个URL的数据数量
+  total_quantities[url] = total_quantity  # 将总数量存储在total_quantities字典中
+
+# 计算所有数据的总数量
+total_ip_quantity = sum(total_quantities.values())
+print(f"IP总数量: {total_ip_quantity}")
 
 with open('ip_ranges.csv', mode='w', newline='', encoding='utf-8-sig') as file:
   writer = csv.writer(file)
