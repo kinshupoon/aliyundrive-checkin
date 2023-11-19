@@ -30,6 +30,7 @@ jobs:
           git config --local user.email "${{ secrets.EMAIL }}"
           git config --local user.name "${{ github.actor }}"
           git rm "国内城市IP.csv" "ip_ranges.csv" "cidr_ip.csv"
+          git push origin main
         env:
           ENSHANCK: ${{ secrets.ENSHANCK }}
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
