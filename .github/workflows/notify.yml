@@ -1,0 +1,19 @@
+name: Notify on Failure
+
+on: 
+  workflow_run:
+    workflows: ["checkin"]  # 替换成你的工作流名称
+    types: 
+      - completed
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'failure'
+
+    steps:
+    - name: Notify via Pushplus
+      env:
+        PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+      run: |
+        curl -X POST -d "token=${PUSHPLUS_TOKEN}&title=Workflow%20${GITHUB_WORKFLOW}%20failed&content=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${{ github.run_id }}" https://www.pushplus.plus/send
