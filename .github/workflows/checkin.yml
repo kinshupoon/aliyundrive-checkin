@@ -31,17 +31,19 @@ jobs:
           ENSHANCK: ${{ secrets.ENSHANCK }}
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
           
-      # - name: CN IP4
-      #   run: |
-      #     python3 ./ip4.py
-      #     git config --local user.email "${{ secrets.EMAIL }}"
-      #     git config --local user.name "${{ github.actor }}"
-      #     git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-      #     git add "国内城市IP.csv"
-      #     git commit -m "Update 国内城市IP.csv"
-      #     git add "ip_ranges.csv"
-      #     git commit -m "Update ip_ranges.csv"
-      #     git add "cidr_ip.csv"
-      #     git commit -m "Update cidr_ip.csv"
-      #     git push origin main
+      - name: CN IP4
+        run: |
+           python3 ./ip4.py
+           git config --local user.email "${{ secrets.EMAIL }}"
+           git config --local user.name "${{ github.actor }}"
+           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+           git status
+           git pull origin main
+           git add "国内城市IP.csv"
+           git commit -m "Update 国内城市IP.csv"
+           git add "ip_ranges.csv"
+           git commit -m "Update ip_ranges.csv"
+           git add "cidr_ip.csv"
+           git commit -m "Update cidr_ip.csv"
+           git push origin main
       - uses: gautamkrishnar/keepalive-workflow@master
