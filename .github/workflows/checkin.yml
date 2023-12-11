@@ -43,6 +43,7 @@ jobs:
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git add "ip.txt"
           git commit -m "Update ip.txt"
+          git config pull.rebase false
           git pull origin main
           git push origin main
           
