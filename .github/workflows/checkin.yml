@@ -1,0 +1,64 @@
+name: aliyundrive-checkin
+on:
+  schedule:
+  - cron: 0 16 * * *
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install requirements
+        run: |
+          pip3 install -r ./requirements.txt
+      - name: Run checkin
+        run: |
+          time=$(($RANDOM%300));echo $time
+          #sleep $time
+          python3 ./main.py --token_string "${{ secrets.TOKEN }}"
+        env:
+          #PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          SERVERCHAN_SENDKEY: ${{ secrets.SCKEY }}
+          # WECOM_TOKENS: ${{ secrets.WECOM_TOKENS }}
+          # WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
+          # BARK_DEVICEKEY: ${{ secrets.BARK_DEVICEKEY }}
+          # FEISHU_DEVICEKEY: ${{ secrets.FEISHU_DEVICEKEY }}
+          
+      - name: Run enshan
+        run: |
+          python3 ./enshan.py
+        env:
+          ENSHANCK: ${{ secrets.ENSHANCK }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+
+      - name: Update Cloudflare CDN ip
+        run: |
+          git clone https://github.com/hello-earth/cloudflare-better-ip.git
+          cd ./cloudflare-better-ip/cloudflare 
+          wget https://raw.githubusercontent.com/vfarid/cf-clean-ips/main/list.txt https://raw.githubusercontent.com/kinshupoon/CloudflareSpeedTest/master/ip4.txt
+          cat ./*.txt > all.txt
+          grep -E -o '([0-9]{1,3}\.){3}[0-9]{1,3}' all.txt | sort -u > ip.txt
+          git config --local user.email "${{ secrets.EMAIL }}"
+          git config --local user.name "${{ github.actor }}"
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git add "ip.txt"
+          git commit -m "Update ip.txt"
+          git config pull.rebase false
+          git pull origin main --allow-unrelated-histories
+          git push origin main
+          
+      # - name: CN IP4
+      #   run: |
+      #      python3 ./ip4.py
+      #      git config --local user.email "${{ secrets.EMAIL }}"
+      #      git config --local user.name "${{ github.actor }}"
+      #      git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+      #      git status
+      #      git add "国内城市IP.csv"
+      #      git commit -m "Update 国内城市IP.csv"
+      #      git add "ip_ranges.csv"
+      #      git commit -m "Update ip_ranges.csv"
+      #      git add "cidr_ip.csv"
+      #      git commit -m "Update cidr_ip.csv"
+      #      git push
+      - uses: gautamkrishnar/keepalive-workflow@master
