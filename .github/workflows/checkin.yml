@@ -35,9 +35,11 @@ jobs:
         run: |
           git clone https://github.com/hello-earth/cloudflare-better-ip.git
           cd ./cloudflare-better-ip/cloudflare 
-          wget https://raw.githubusercontent.com/vfarid/cf-clean-ips/main/list.txt https://raw.githubusercontent.com/kinshupoon/CloudflareSpeedTest/master/ip4.txt
+          wget https://raw.githubusercontent.com/vfarid/cf-clean-ips/main/list.txt
           cat ./*.txt > all.txt
           grep -E -o '([0-9]{1,3}\.){3}[0-9]{1,3}' all.txt | sort -u > ip.txt
+          wget https://raw.githubusercontent.com/kinshupoon/CloudflareSpeedTest/master/ip4.txt
+          cat ip4.txt >> ip.txt
           git config --local user.email "${{ secrets.EMAIL }}"
           git config --local user.name "${{ github.actor }}"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
