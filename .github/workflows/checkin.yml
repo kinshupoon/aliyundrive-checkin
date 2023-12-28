@@ -14,7 +14,7 @@ jobs:
       - name: Run checkin
         run: |
           time=$(($RANDOM%300));echo $time
-          #sleep $time
+          sleep $time
           python3 ./main.py --token_string "${{ secrets.TOKEN }}"
         env:
           #PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
