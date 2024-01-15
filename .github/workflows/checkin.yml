@@ -1,4 +1,4 @@
-name: aliyundrive-checkin
+name: enshan-checkin
 on:
   schedule:
   - cron: 0 16 * * *
@@ -11,14 +11,14 @@ jobs:
       - name: Install requirements
         run: |
           pip3 install -r ./requirements.txt
-      - name: Run checkin
-        run: |
-          time=$(($RANDOM%300));echo $time
-          sleep $time
-          python3 ./main.py --token_string "${{ secrets.TOKEN }}"
-        env:
+      #- name: Run checkin
+        #run: |
+          #time=$(($RANDOM%300));echo $time
+          #sleep $time
+          #python3 ./main.py --token_string "${{ secrets.TOKEN }}"
+        #env:
           #PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
-          SERVERCHAN_SENDKEY: ${{ secrets.SCKEY }}
+          #SERVERCHAN_SENDKEY: ${{ secrets.SCKEY }}
           # WECOM_TOKENS: ${{ secrets.WECOM_TOKENS }}
           # WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
           # BARK_DEVICEKEY: ${{ secrets.BARK_DEVICEKEY }}
