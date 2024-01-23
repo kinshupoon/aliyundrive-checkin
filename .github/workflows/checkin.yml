@@ -54,10 +54,7 @@ jobs:
           title=huggingface项目状况通知 #发送的标题
           url=http://www.pushplus.plus/send/${{ secrets.PUSHPLUS_TOKEN }}  #请将token字段替换成自己的token          
           if [ $respone == "Running" ]; then
-              echo "项目运行中"
-              content="项目运行中" #发送的内容
-              json="{\"token\":  \"${{ secrets.PUSHPLUS_TOKEN }}\", \"title\": \"$title\", \"content\": \"$content\", \"template\": \"html\"}"
-              curl -H "Content-Type: application/json" -X POST -d "$json" $url           
+              echo "项目运行中"         
           else
               echo "项目已停止"
               content="项目已停止，请登录检查" #发送的内容
