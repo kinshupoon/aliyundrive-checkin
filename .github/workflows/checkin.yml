@@ -51,13 +51,16 @@ jobs:
                       -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' \
                       --compressed)
           respone=$(echo $ref | grep -o "Running")
+          title=huggingface项目状况通知 #发送的标题
+          url=http://www.pushplus.plus/send/${{ secrets.PUSHPLUS_TOKEN }}  #请将token字段替换成自己的token          
           if [ $respone == "Running" ]; then
               echo "项目运行中"
+              content="项目运行中" #发送的内容
+              json="{\"token\":  \"${{ secrets.PUSHPLUS_TOKEN }}\", \"title\": \"$title\", \"content\": \"$content\", \"template\": \"html\"}"
+              curl -H "Content-Type: application/json" -X POST -d "$json" $url           
           else
               echo "项目已停止"
-              title=huggingface项目状况通知 #发送的标题
               content="项目已停止，请登录检查" #发送的内容
-              url=http://www.pushplus.plus/send/${{ secrets.PUSHPLUS_TOKEN }}  #请将token字段替换成自己的token
               json="{\"token\":  \"${{ secrets.PUSHPLUS_TOKEN }}\", \"title\": \"$title\", \"content\": \"$content\", \"template\": \"html\"}"
               curl -H "Content-Type: application/json" -X POST -d "$json" $url
           fi
