@@ -33,23 +33,7 @@ jobs:
           
       - name: Watch huggingface
         run: |
-          ref=$(curl 'https://huggingface.co/spaces/kinshupoon/Auto-keep-online' \
-                      -H 'authority: huggingface.co' \
-                      -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
-                      -H 'accept-language: zh-CN,zh;q=0.9' \
-                      -H 'cache-control: no-cache' \
-                      -H 'cookie: __stripe_mid=ef326c18-378d-4fa8-b4cc-be250749c9a8eee2c5; token=aMGxZZDEJhFnkOxngaChqslADNmPQVbwnuarTVexDEVTxINhaqjjRsCnzknBjsgzzFfGeRGcZWxNIqIJAJeuhlBbDljyzQotnQSaFfbOxucVAqyoyrCUkxNYhhVzIJoM; _ga=GA1.1.495263146.1705734671; __stripe_sid=b2448969-9d6f-4e90-913a-a7c74ecaf771147fe1; _ga_8Q63TH4CSL=GS1.1.1706020899.2.0.1706020899.60.0.0; aws-waf-token=1bb2cf15-08da-4487-8cbb-e48afb1473ef:EgoAb7pogw0vAAAA:qY3BxFtJ71pqZTPCTkhPJcoD8ls9qzQfMqjqXebfZwuiTdfgo/HtXq9ku4IGYZaNlW4qAs8vpXDw434qOV+kVrr0VzpxTsBrPnb5Bbs/lH3M50ej43UN7SGalAnbmUhq0ZSJlNcMyLzQUQmrzlcmK0wbMHTdPjAHEa2T3G3OyiEwrVT86bSI6/e0eBLFbqcvpZpEtQh6OvSfg4vzvPXIyOK4ruDbZ7Q/lHjtgrr8j1V9VUAIRixnWlt6B6+K4D37zqoDHGF1TKRNpx1o+3UWWVCufyg=' \
-                      -H 'pragma: no-cache' \
-                      -H 'sec-ch-ua: "Not_A Brand";v="99"， "Google Chrome";v="109"， "Chromium";v="109"' \
-                      -H 'sec-ch-ua-mobile: ?0' \
-                      -H 'sec-ch-ua-platform: "Windows"' \
-                      -H 'sec-fetch-dest: document' \
-                      -H 'sec-fetch-mode: navigate' \
-                      -H 'sec-fetch-site: none' \
-                      -H 'sec-fetch-user: ?1' \
-                      -H 'upgrade-insecure-requests: 1' \
-                      -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' \
-                      --compressed)
+          ref=$(curl 'https://huggingface.co/spaces/kinshupoon/test')
           respone=$(echo $ref | grep -o "Running")
           title=huggingface项目状况通知 #发送的标题
           url=http://www.pushplus.plus/send/${{ secrets.PUSHPLUS_TOKEN }}  #请将token字段替换成自己的token          
