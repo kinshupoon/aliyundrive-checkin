@@ -24,12 +24,12 @@ jobs:
           # BARK_DEVICEKEY: ${{ secrets.BARK_DEVICEKEY }}
           # FEISHU_DEVICEKEY: ${{ secrets.FEISHU_DEVICEKEY }}
           
-      # - name: Run enshan
-      #   run: |
-      #     python3 ./enshan.py
-      #   env:
-      #     ENSHANCK: ${{ secrets.ENSHANCK }}
-      #     PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+      - name: Run enshan
+        run: |
+          python3 ./enshan.py
+        env:
+          ENSHANCK: ${{ secrets.ENSHANCK }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
           
       - name: Watch huggingface
         run: |
@@ -37,7 +37,7 @@ jobs:
           respone=$(echo $ref | grep -o "Running")
           title=huggingface项目状况通知 #发送的标题
           url=http://www.pushplus.plus/send/${{ secrets.PUSHPLUS_TOKEN }}  #请将token字段替换成自己的token          
-          if [ $respone != "Running" ]; then
+          if [ "$respone" != "Running" ]; then
               echo "项目已停止"
               content="项目已停止，请登录检查" #发送的内容
               json="{\"token\":  \"${{ secrets.PUSHPLUS_TOKEN }}\", \"title\": \"$title\", \"content\": \"$content\", \"template\": \"html\"}"
