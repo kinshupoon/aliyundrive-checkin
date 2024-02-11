@@ -1,7 +1,7 @@
 name: enshan-checkin
 on:
   schedule:
-  - cron: 0 4 * * *
+  - cron: 30 0 * * *
   workflow_dispatch:
 jobs:
   build:
