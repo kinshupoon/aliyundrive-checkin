@@ -35,14 +35,16 @@ jobs:
         run: |
           wget "https://github.com/gaotianliuyun/gao/archive/refs/heads/master.zip"
           unzip master.zip
-          tar -czf master.tar.gz gao-master/
-          rm -rf ./master.zip ./gao-master/
+          mv ./gao-master ./gao
+          tar -czf master.tar.gz gao/
+          rm -rf ./master.zip ./gao
           git config --local user.email "${{ secrets.EMAIL }}"
           git config --local user.name "${{ github.actor }}"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git status
           git add "master.tar.gz"
           git commit -m "Update master.tar.gz"
+          git push
 
       # - name: CN IP4
       #   run: |
