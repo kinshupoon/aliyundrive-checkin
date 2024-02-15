@@ -36,6 +36,7 @@ jobs:
           wget "https://github.com/gaotianliuyun/gao/archive/refs/heads/master.zip"
           unzip master.zip
           mv ./gao-master ./gao
+          rm ./master.tar.gz
           tar -czf master.tar.gz gao/
           rm -rf ./master.zip ./gao
           git config --local user.email "${{ secrets.EMAIL }}"
