@@ -1,9 +1,12 @@
-import requests,re,os,urllib.parse
+import requests
+import re
+import os
+import urllib.parse
 
-#配置恩山的cookie 到配置文件config.sh export enshanck='' 需要推送配置推送加token export plustoken=''
+# 配置恩山的cookie 到配置文件config.sh export enshanck='' 需要推送配置推送加token export plustoken=''
 enshanck = os.environ.get('ENSHANCK')
-#推送加 token
-plustoken = os.environ.get('PUSHPLUS_TOKEN')
+# 推送加 token
+#plustoken = os.environ.get('PUSHPLUS_TOKEN')
 
 def Push(title, content):
     # 对 title 和 content 进行 URL 编码
@@ -29,14 +32,16 @@ headers = {
 }
 session = requests.session()
 response = session.get('https://www.right.com.cn/FORUM/home.php?mod=spacecp&ac=credit&showcredit=1', headers=headers)
+
 try:
     coin = re.findall("恩山币: </em>(.*?)&nbsp;", response.text)[0]
     point = re.findall("<em>积分: </em>(.*?)<span", response.text)[0]
     res = f"恩山币：{coin}\n积分：{point}"
     print(res)
+
     # 调用新的 Push 函数
     Push(title='恩山签到', content=res)
-  
+
 except Exception as e:
     res = str(e)
     print(f'提取信息失败: {res}')
